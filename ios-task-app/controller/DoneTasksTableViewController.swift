@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DoneTasksController.swift
 //  ios-task-app
 //
 //  Created by Son Hong Do on 02/10/2021.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DoneTasksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        tableView.backgroundColor = .blue
     }
-
-
 }
-
