@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class NewTaskViewController: UIViewController {
 
@@ -17,17 +18,37 @@ class NewTaskViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
 
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
-
+    
+    weak var delegate: TasksVCDelegate?
+    
+    private var subscribers = Set<AnyCancellable>()
+    @Published private var taskString: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupGesture()
         observeKeyboard()
+        observeForm()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         taskTextField.becomeFirstResponder()
+    }
+    
+    private func observeForm() {
+        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: nil).map ({
+            ($0.object as? UITextField)?.text
+        }).sink(receiveValue: {
+            [unowned self] (text) in
+            self.taskString = text
+        }).store(in: &subscribers)
+        
+        $taskString.sink(receiveValue: {
+            [unowned self] (text) in
+            self.saveButton.isEnabled = text?.isEmpty == false
+        }).store(in: &subscribers)
     }
 
     private func setupViews() {
@@ -52,7 +73,7 @@ class NewTaskViewController: UIViewController {
 
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: { [unowned self] in
             self.containerViewBottomConstraint.constant = keyboardHeight - (200 + 8)
-//            self.view.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         }, completion: nil)
 
 
@@ -74,4 +95,18 @@ class NewTaskViewController: UIViewController {
     }
 
 
+    @IBAction func calendarButtonTapped(_ sender: Any) {
+        print("calendarButtonTapped")
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        print("saveButtonTapped")
+        
+        guard let taskString = self.taskString else { return }
+
+        let task = Task(title: taskString)
+        
+        delegate?.didAddTask(task)
+        
+    }
 }

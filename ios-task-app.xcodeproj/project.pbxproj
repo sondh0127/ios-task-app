@@ -13,6 +13,10 @@
 		184947DF2707EF3A000C1E87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184947DD2707EF3A000C1E87 /* Main.storyboard */; };
 		184947E12707EF3B000C1E87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184947E02707EF3B000C1E87 /* Assets.xcassets */; };
 		184947E42707EF3B000C1E87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184947E22707EF3B000C1E87 /* LaunchScreen.storyboard */; };
+		184D47F227095273001930F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 184D47F127095273001930F9 /* GoogleService-Info.plist */; };
+		184D47F4270953E0001930F9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D47F3270953E0001930F9 /* Task.swift */; };
+		184D47F727095C30001930F9 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D47F627095C30001930F9 /* DatabaseManager.swift */; };
+		184D47FA27096AF5001930F9 /* TasksVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184D47F927096AF5001930F9 /* TasksVCDelegate.swift */; };
 		18CB53BE27081213009C5AFF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 18CB53BD27081213009C5AFF /* Podfile */; };
 		18CB53C127081C14009C5AFF /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CB53C027081C14009C5AFF /* MenuSection.swift */; };
 		18FC5C65270827190075FE3B /* OnGoingTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC5C64270827190075FE3B /* OnGoingTasksTableViewController.swift */; };
@@ -31,6 +35,10 @@
 		184947E02707EF3B000C1E87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		184947E32707EF3B000C1E87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		184947E52707EF3B000C1E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		184D47F127095273001930F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		184D47F3270953E0001930F9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		184D47F627095C30001930F9 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		184D47F927096AF5001930F9 /* TasksVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksVCDelegate.swift; sourceTree = "<group>"; };
 		18CB53BD27081213009C5AFF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		18CB53C027081C14009C5AFF /* MenuSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSection.swift; sourceTree = "<group>"; };
 		18FC5C64270827190075FE3B /* OnGoingTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnGoingTasksTableViewController.swift; sourceTree = "<group>"; };
@@ -74,23 +82,42 @@
 		184947D62707EF3A000C1E87 /* ios-task-app */ = {
 			isa = PBXGroup;
 			children = (
+				184D47F827096AC9001930F9 /* protocol */,
+				184D47F527095C13001930F9 /* service */,
 				18FC5C63270826680075FE3B /* controller */,
 				18CB53BF27081BF6009C5AFF /* model */,
 				184947D72707EF3A000C1E87 /* AppDelegate.swift */,
 				184947D92707EF3A000C1E87 /* SceneDelegate.swift */,
-				184947DB2707EF3A000C1E87 /* TasksViewController.swift */,
 				184947DD2707EF3A000C1E87 /* Main.storyboard */,
 				184947E02707EF3B000C1E87 /* Assets.xcassets */,
+				184D47F127095273001930F9 /* GoogleService-Info.plist */,
 				184947E22707EF3B000C1E87 /* LaunchScreen.storyboard */,
 				184947E52707EF3B000C1E87 /* Info.plist */,
 			);
 			path = "ios-task-app";
 			sourceTree = "<group>";
 		};
+		184D47F527095C13001930F9 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				184D47F627095C30001930F9 /* DatabaseManager.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		184D47F827096AC9001930F9 /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				184D47F927096AF5001930F9 /* TasksVCDelegate.swift */,
+			);
+			path = protocol;
+			sourceTree = "<group>";
+		};
 		18CB53BF27081BF6009C5AFF /* model */ = {
 			isa = PBXGroup;
 			children = (
 				18CB53C027081C14009C5AFF /* MenuSection.swift */,
+				184D47F3270953E0001930F9 /* Task.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -98,6 +125,7 @@
 		18FC5C63270826680075FE3B /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				184947DB2707EF3A000C1E87 /* TasksViewController.swift */,
 				18FC5C64270827190075FE3B /* OnGoingTasksTableViewController.swift */,
 				18FC5C66270827270075FE3B /* DoneTasksTableViewController.swift */,
 				18FC5C682708601F0075FE3B /* NewTaskViewController.swift */,
@@ -184,6 +212,7 @@
 			files = (
 				184947E42707EF3B000C1E87 /* LaunchScreen.storyboard in Resources */,
 				184947E12707EF3B000C1E87 /* Assets.xcassets in Resources */,
+				184D47F227095273001930F9 /* GoogleService-Info.plist in Resources */,
 				18CB53BE27081213009C5AFF /* Podfile in Resources */,
 				184947DF2707EF3A000C1E87 /* Main.storyboard in Resources */,
 			);
@@ -238,6 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184D47FA27096AF5001930F9 /* TasksVCDelegate.swift in Sources */,
+				184D47F4270953E0001930F9 /* Task.swift in Sources */,
 				184947DC2707EF3A000C1E87 /* TasksViewController.swift in Sources */,
 				18FC5C65270827190075FE3B /* OnGoingTasksTableViewController.swift in Sources */,
 				18FC5C67270827270075FE3B /* DoneTasksTableViewController.swift in Sources */,
@@ -245,6 +276,7 @@
 				18CB53C127081C14009C5AFF /* MenuSection.swift in Sources */,
 				184947DA2707EF3A000C1E87 /* SceneDelegate.swift in Sources */,
 				18FC5C692708601F0075FE3B /* NewTaskViewController.swift in Sources */,
+				184D47F727095C30001930F9 /* DatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

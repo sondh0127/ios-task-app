@@ -13,6 +13,8 @@ class TasksViewController: UIViewController {
     @IBOutlet weak var onGoingTasksTableView: UIView!
     @IBOutlet weak var doneTasksTableView: UIView!
 
+    private let databaseManager = DatabaseManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSegmentedControl()
@@ -50,11 +52,39 @@ class TasksViewController: UIViewController {
             doneTasksTableView.isHidden = false
         }
     }
-    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showNewTask",
+            let destination = segue.destination as? NewTaskViewController {
+            destination.delegate = self
+        }
+    }
+
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "showNewTask", sender: nil)
     }
-    
+
 
 }
 
+
+extension TasksViewController: TasksVCDelegate {
+    
+    func didAddTask(_ task: Task) {
+        presentingViewController?.dismiss(animated: false, completion: {
+            [unowned self] in
+            self.databaseManager.addTask(task, completion: {
+                (result) in
+                switch result {
+                case .success:
+                    print("yay")
+                case .failure(let error):
+                    print("error \(error.localizedDescription)")
+                }
+            })
+        })
+        
+        
+    }
+
+}
